@@ -11,6 +11,7 @@ The main components of the project are:
 - `Greeter` service: This service has two methods: `SayHello` and `SayHelloAgain`. Both methods take a `HelloRequest` message as input and return a `HelloReply` message.
 
 - `HelloRequest` and `HelloReply` messages: These are the request and response message types. Each `HelloRequest` message has three fields: `firstName`, `lastName`, and `email`. The `HelloReply` message has a `message` field.
+  
    NB: you can change these fileds in the client code (HelloWorldClient.java).
   
 ## How to Run
