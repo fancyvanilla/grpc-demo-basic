@@ -84,14 +84,16 @@ public class HelloWorldServer {
 
         @Override
         public void sayHello(HelloRequest req, StreamObserver<HelloReply> responseObserver) {
-            HelloReply reply = HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
+            HelloReply reply = HelloReply.newBuilder().setMessage("Hello " + req.getFirstName()+" "+
+                    req.getLastName()+" with the email address "+req.getEmail()
+            ).build();
             responseObserver.onNext(reply);
             responseObserver.onCompleted();
         }
 
         @Override
         public void sayHelloAgain(HelloRequest req, StreamObserver<HelloReply> responseObserver) {
-            HelloReply reply = HelloReply.newBuilder().setMessage("Hello again " + req.getName()).build();
+            HelloReply reply = HelloReply.newBuilder().setMessage("Hello again " + req.getFirstName()).build();
             responseObserver.onNext(reply);
             responseObserver.onCompleted();
         }
