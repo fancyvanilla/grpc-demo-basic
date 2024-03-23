@@ -29,6 +29,7 @@ import java.util.logging.Logger;
 /**
  * A simple client that requests a greeting from the {@link HelloWorldServer}.
  */
+//TODO:Modifier l'exemple HelloWord en ajoutant d'autres informations avec le nom (prénom, cin,...)
 public class HelloWorldClient {
     private static final Logger logger = Logger.getLogger(HelloWorldClient.class.getName());
 
@@ -44,9 +45,13 @@ public class HelloWorldClient {
     }
 
     /** Say hello to server. */
-    public void greet(String name) {
-        logger.info("Will try to greet " + name + " ...");
-        HelloRequest request = HelloRequest.newBuilder().setName(name).build();
+    public void greet(String firstName,String lastName,String email) {
+        logger.info("Will try to greet " + firstName + " ...");
+        HelloRequest request = HelloRequest.newBuilder()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .build();
         HelloReply response;
         try {
             response = blockingStub.sayHello(request);
@@ -70,7 +75,9 @@ public class HelloWorldClient {
      * greeting. The second argument is the target server.
      */
     public static void main(String[] args) throws Exception {
-        String user = "world";
+        String firstName = "mariem";
+        String lastName ="benyounes";
+        String email="maryemby21@gmail.com";
         // Access a service running on the local machine on port 50051
         String target = "localhost:50051";
         // Allow passing in the user and target strings as command line arguments
@@ -78,11 +85,11 @@ public class HelloWorldClient {
             if ("--help".equals(args[0])) {
                 System.err.println("Usage: [name [target]]");
                 System.err.println("");
-                System.err.println("  name    The name you wish to be greeted by. Defaults to " + user);
+                System.err.println("  name    The name you wish to be greeted by. Defaults to " + firstName);
                 System.err.println("  target  The server to connect to. Defaults to " + target);
                 System.exit(1);
             }
-            user = args[0];
+            firstName = args[0];
         }
         if (args.length > 1) {
             target = args[1];
@@ -98,7 +105,7 @@ public class HelloWorldClient {
                 .build();
         try {
             HelloWorldClient client = new HelloWorldClient(channel);
-            client.greet(user);
+            client.greet(firstName,lastName,email);
         } finally {
             // ManagedChannels use resources like threads and TCP connections. To prevent leaking these
             // resources the channel should be shut down when it will no longer be used. If it may be used
